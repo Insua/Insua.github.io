@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>在Arch上使用Laravel valet | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  May 13, 2017
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/Archlinux/'>Archlinux</a> 
+    
+      <a href='/tags/Laravel/'>Laravel</a> 
+    
+      <a href='/tags/valet/'>valet</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">在Arch上使用Laravel valet</h1>
+  <section class="post-content article-entry">
+    <p>valet-linux的github<a href="https://github.com/cpriego/valet-linux" target="_blank" rel="noopener">地址</a><br>valet默认是使用NetWorkManager来管理dnsmasq的，不过我是用netctl来管理网络的，所以默认安装后ping foo.app并不能指向127.0.0.1<br>那么就直接用dnsmasq了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/dnsmasq.conf</span><br></pre></td></tr></table></figure></p>
+<p>修改listen-address和address</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">listen-address=127.0.0.1  </span><br><span class="line">  </span><br><span class="line">address=/app/127.0.0.1</span><br><span class="line">address=/dev/192.168.10.10</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>指向dev的是homestead的ip,valet的默认domain修改为app  </p>
+</blockquote>
+<p>修改 /etc/resolv.conf<br>将</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nameserver 127.0.0.1</span><br></pre></td></tr></table></figure>
+<p>加到最上面<br>使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chattr +i /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<p>为其加锁，最后别忘了用systemd将dnsmasq自动启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="built_in">enable</span> dnsmasq</span><br></pre></td></tr></table></figure>
+<p>valet-linux其他的使用按照github wiki上的操作即可，目前没有发现什么异常</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2017/09/06/use-wakatime-to-statistics-coding-time/">
+        ← prev <!--用wakatime来统计coding信息-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2017/03/10/some-gitlab-tips/">
+        <!--一些gitlab的tips--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+

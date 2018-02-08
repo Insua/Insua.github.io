@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>AUR打包成pkg | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  February 5, 2017
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/Linux/'>Linux</a> 
+    
+      <a href='/tags/Arch-Linux/'>Arch Linux</a> 
+    
+      <a href='/tags/AUR/'>AUR</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">AUR打包成pkg</h1>
+  <section class="post-content article-entry">
+    <p>大多数情况下，我们都是使用yaourt等AUR包管理工具来安装、更新AUR包，不过有些时候在网络条件比较差的情况下，源文件下载特别慢而build失败，我们先把PKGBUILD下载到本地<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yaourt -G pkg-name</span><br><span class="line">$ <span class="built_in">cd</span> pkg-name</span><br></pre></td></tr></table></figure></p>
+<p>查看PKGBUILD<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim PKGBUILD</span><br></pre></td></tr></table></figure></p>
+<p>在找到源码的地址后，可以使用下载工具将源码下载或克隆到本地，修改源码地址，之后编译生成pkg包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ makepkg</span><br></pre></td></tr></table></figure></p>
+<p>编译、打包完成后，在目录下会生成pkg-name-version-arch.pkg.tar.xz<br>直接安装到本机的话，执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -U pkg-name-version-arch.pkg.tar.xz</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2017/03/10/some-gitlab-tips/">
+        ← prev <!--一些gitlab的tips-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2017/01/17/three-packages-for-laravel-developer/">
+        <!--开发Laravel时必备的三个包--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>开发Laravel时必备的三个包 | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  January 17, 2017
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/laravel/'>laravel</a> 
+    
+      <a href='/tags/php/'>php</a> 
+    
+      <a href='/tags/package/'>package</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">开发Laravel时必备的三个包</h1>
+  <section class="post-content article-entry">
+    <h3 id="barryvdh-laravel-debugbar"><a href="#barryvdh-laravel-debugbar" class="headerlink" title="barryvdh/laravel-debugbar"></a>barryvdh/laravel-debugbar</h3><p>作用是页面底部显示丰富的调试信息  </p>
+<blockquote>
+<p>安装  </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require barryvdh/laravel-debugbar</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>config/app.php注册ServerProvider  </p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Barryvdh\Debugbar\ServiceProvider::class,</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>增加Facades  </p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Debugbar'</span> =&gt; Barryvdh\Debugbar\Facade::class,</span><br></pre></td></tr></table></figure>
+<h3 id="barryvdh-laravel-ide-helper"><a href="#barryvdh-laravel-ide-helper" class="headerlink" title="barryvdh/laravel-ide-helper"></a>barryvdh/laravel-ide-helper</h3><p>生成一个php文件，为IDE提供更好的支持  </p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require barryvdh/laravel-ide-helper</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>config/app.php注册ServerProvider</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>如果使用的是Homestead，ssh登录虚拟机后，在虚拟机执行，否则会找不到数据库而报错  </p>
+<h3 id="sven-artisan-view"><a href="#sven-artisan-view" class="headerlink" title="sven/artisan-view"></a>sven/artisan-view</h3><p>使用artisan命令生成视图文件</p>
+<blockquote>
+<p>安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require sven/artisan-view</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>config/app.php注册ServerProvider</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sven\ArtisanView\ArtisanViewServiceProvider::class,</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<p>生成视图<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:view index</span><br></pre></td></tr></table></figure></p>
+<p>生成目录下的视图<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:view pages.index</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2017/02/05/arch-make-pkg/">
+        ← prev <!--AUR打包成pkg-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+
