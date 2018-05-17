@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>laravel echo server 结合 jwt 授权 | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  May 17, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/laravel/'>laravel</a> 
+    
+      <a href='/tags/websocket/'>websocket</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">laravel echo server 结合 jwt 授权</h1>
+  <section class="post-content article-entry">
+    <p>首先，因为重写了 axios 的拦截器，为了确保 socket 消息头的引入，在 axios 拦截器中中加入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.Echo)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">let</span> socketId = <span class="built_in">window</span>.Echo.socketId()</span><br><span class="line">    <span class="keyword">if</span> (socketId)</span><br><span class="line">    &#123;</span><br><span class="line">      request.headers.common[<span class="string">'X-Socket-Id'</span>] = socketId</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后，修改BroadcastServiceprovider，修改认证路由为api模组<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Broadcast::routes([<span class="string">"prefix"</span> =&gt; <span class="string">"api"</span>, <span class="string">"middleware"</span> =&gt; <span class="string">"api"</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>最后，在 laravel-echo-server.json 中确保认证路由的正确<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;authHost&quot;: &quot;http://dev.test&quot;,</span><br><span class="line">	&quot;authEndpoint&quot;: &quot;/api/broadcasting/auth&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好了，我们现在可以愉快的使用 laravel 发送广播了，私有频道在 routes/channels.php 中编写认证权限  </p>
+<p>在前端使用 Laravel Echo 监听私有频道时，只有通过 laravel echo server 认证的私有频道才会建立监听，并收听到广播</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2018/05/17/use-vue-draggable-and-sortable-js/">
+        <!--使用Sortable.js和Vue.Draggable的一些坑--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+

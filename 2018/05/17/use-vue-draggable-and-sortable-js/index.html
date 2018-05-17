@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>使用Sortable.js和Vue.Draggable的一些坑 | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  May 17, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/vue/'>vue</a> 
+    
+      <a href='/tags/javascript/'>javascript</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">使用Sortable.js和Vue.Draggable的一些坑</h1>
+  <section class="post-content article-entry">
+    <p>Sortable.js 是拖拽列表最著名的库，而 Vue.Draggable 是其在 Vue 中的封装，在 vue 中引入十分的方便。</p>
+<p>但是我z在项目中的需求是左侧列表初始时是空的，从右侧列表拖动到左侧生成，这就造成了一个问题，左侧因为没有dom节点而拖不过来，这时就需要在左侧的 draggable 组件添加一个 min-height 的 css 属性。</p>
+<p>另一个问题是，在使用 clone 模式时，因为 js 对象都是指向同一个指针的，再从右侧拖动到左侧的节点，当修改其属性时，把所有拖拽过来的相同节点也都修改了。<br>我的解决方法是，把右侧改为 pull 模式，同事使用 vue 的 watch，当右侧的发生变化时重新生成右侧的列表，这样就和初始化的对象完全脱离了。</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2018/05/17/laravel-echo-by-jwt/">
+        ← prev <!--laravel echo server 结合 jwt 授权-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2018/04/22/use-viewerjs-in-vue/">
+        <!--在vue中使用viewerjs--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+
