@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>image-webpack-loader resolve jpg file wrong in ubuntu server | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  August 2, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/webpack/'>webpack</a> 
+    
+      <a href='/tags/ubuntu/'>ubuntu</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">image-webpack-loader resolve jpg file wrong in ubuntu server</h1>
+  <section class="post-content article-entry">
+    <p>In my production Ubuntu server which version is 16.04.3 LTS,after push my code to it,I run<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn prod</span><br></pre></td></tr></table></figure></p>
+<p>but it show me a error notice<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ERROR in ./resources/assets/js/mobile/pages/Home/images/banner-oath.jpg</span><br><span class="line">Module build failed: Error: write EPIPE</span><br><span class="line">    at _errnoException (util.js:992:11)</span><br><span class="line">    at WriteWrap.afterWrite [as oncomplete] (net.js:864:14)</span><br></pre></td></tr></table></figure></p>
+<p>after search by google,this <a href="https://github.com/tcoopman/image-webpack-loader/issues/142" target="_blank" rel="noopener">link</a> solve my problem<br>install libpng16-dev in server<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libpng16-dev</span><br></pre></td></tr></table></figure></p>
+<p>then, it is all fine.</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2018/05/17/laravel-echo-by-jwt/">
+        <!--laravel echo server 结合 jwt 授权--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+
