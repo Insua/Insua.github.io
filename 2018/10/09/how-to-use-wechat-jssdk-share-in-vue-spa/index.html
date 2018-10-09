@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>如何在 Vue Spa 中使用微信jssdk分享接口 | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  October 9, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/vue/'>vue</a> 
+    
+      <a href='/tags/wechat/'>wechat</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">如何在 Vue Spa 中使用微信jssdk分享接口</h1>
+  <section class="post-content article-entry">
+    <p>在Vue Spa项目中，使用了 History 模式，要使用分享接口，只能在第一次访问的时候，就加载jssdk配置，通过Vue router进入其他页面之后再做加载，虽然在调试模式下依然会显示配置正确，但是分享接口是无效的，那么怎么办呢？直接在App.vue下就做jssdk config   </p>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><h4 id="编写后端接口"><a href="#编写后端接口" class="headerlink" title="编写后端接口"></a>编写后端接口</h4><p>使用 overture/wechat接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public function jssdk(Request $request)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;jssdk-&gt;setUrl($request-&gt;input(&apos;url&apos;));</span><br><span class="line">        return $this-&gt;jssdk-&gt;buildConfig([</span><br><span class="line">            &apos;onMenuShareAppMessage&apos;,</span><br><span class="line">            &apos;onMenuShareWechat&apos;,</span><br><span class="line">            &apos;onMenuShareTimeline&apos;,</span><br><span class="line">            &apos;getLocation&apos;</span><br><span class="line">        ], false);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="在App-vue中注入配置"><a href="#在App-vue中注入配置" class="headerlink" title="在App.vue中注入配置"></a>在App.vue中注入配置</h4><p>引入wexin-js-sdk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const wx = require(&apos;weixin-js-sdk&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">async getJssdk () &#123;</span><br><span class="line">      const &#123; data &#125; = await this.$axios.post(&apos;/api/wechat-work/jssdk&apos;, &#123; url: window.location.href &#125;)</span><br><span class="line">      wx.config(data)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="在分享页面中编写分享方法"><a href="#在分享页面中编写分享方法" class="headerlink" title="在分享页面中编写分享方法"></a>在分享页面中编写分享方法</h4><p>引入wexin-js-sdk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const wx = require(&apos;weixin-js-sdk&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">wx.ready(() =&gt; &#123;</span><br><span class="line">      const self = this</span><br><span class="line">      wx.onMenuShareTimeline(&#123;</span><br><span class="line">        title: self.shareTitle,</span><br><span class="line">        link: window.location.href,</span><br><span class="line">        imgUrl: self.logoPath,</span><br><span class="line">        success: function () &#123;</span><br><span class="line">          self.forward(&apos;onMenuShareTimeline&apos;)</span><br><span class="line">          self.$toast.success(&apos;分享成功&apos;)</span><br><span class="line">        &#125;,</span><br><span class="line">        cancel: function () &#123;</span><br><span class="line">          self.$toast.fail(&apos;取消分享&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2018/08/02/image-webpack-loader-with-jpg-file/">
+        <!--image-webpack-loader resolve jpg file wrong in ubuntu server--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+
