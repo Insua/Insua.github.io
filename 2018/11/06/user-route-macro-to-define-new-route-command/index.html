@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="alternate" type="application/rss+xml" title="Xeneizes" href="">
+        <title>使用Route macro来定义Route的新方法 | 代码如歌</title>
+
+        <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/img/footballplayer.png" alt="代码如歌" /></a>
+            <h1><a href="/">Xeneizes</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  November 6, 2018
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/laravel/'>laravel</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">使用Route macro来定义Route的新方法</h1>
+  <section class="post-content article-entry">
+    <p>使用 Laravel 在做后台表单操作时，通常会增加一个批量删除的功能<br>起初是在 <strong>route</strong> 里定义一个新的 delete<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Route::delete(&apos;prefix/destroy-selection&apos;, &apos;CurrentController@destroySelection);</span><br></pre></td></tr></table></figure></p>
+<p>之后再定义 apiResource<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Route::apiResource(&apos;prefix&apos;, &apos;CurrentController&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>这样写十分啰嗦且冗长，Laravel 的强大之处就是它提供了 Macro 来扩展功能  </p>
+<p>在 AppServiceProvider 的 boot 方法里加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Route::macro(&apos;full&apos;,function ($prefix, $controller)&#123;</span><br><span class="line">            Route::delete($prefix.&apos;/destroy-selection&apos;, $controller.&apos;@destroySelection&apos;)-&gt;name($prefix.&apos;destroy-selection&apos;);</span><br><span class="line">            Route::apiResource($prefix, $controller);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>之后在 <strong>route</strong> 里就可以直接使用 full 来定义了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Route::full(&apos;prefix&apos;, &apos;CurrentController&apos;);</span><br></pre></td></tr></table></figure></p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Xeneizes</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2018/10/09/how-to-use-wechat-jssdk-share-in-vue-spa/">
+        <!--如何在 Vue Spa 中使用微信jssdk分享接口--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2017-2018 Xeneizes. All rights reserved. </section>
+        </footer>
+    </body>
+</html>
+
+
